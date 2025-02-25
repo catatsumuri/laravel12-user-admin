@@ -62,4 +62,4 @@ jobs:
         run: php artisan migrate --env=testing --force
 
       - name: Run Tests
-        run: ./vendor/bin/pest --env=testing
+        run: ./vendor/bin/pest
