@@ -1,46 +1,45 @@
-import { type BreadcrumbItem, type SharedData } from "@/types"
-import { Transition } from "@headlessui/react"
-import { Head, Link, useForm, usePage } from "@inertiajs/react"
-import { FormEventHandler } from "react"
+import { type BreadcrumbItem, type SharedData } from '@/types';
+import { Transition } from '@headlessui/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { FormEventHandler } from 'react';
 
-import DeleteUser from "@/components/delete-user"
-import HeadingSmall from "@/components/heading-small"
-import InputError from "@/components/input-error"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import AppLayout from "@/layouts/app-layout"
-import SettingsLayout from "@/layouts/settings/layout"
+import DeleteUser from '@/components/delete-user';
+import HeadingSmall from '@/components/heading-small';
+import InputError from '@/components/input-error';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import AppLayout from '@/layouts/app-layout';
+import SettingsLayout from '@/layouts/settings/layout';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
-    title: "Profile settings",
-    href: "/settings/profile"
-  }
-]
+    title: 'Profile settings',
+    href: '/settings/profile',
+  },
+];
 
 export default function Profile({
   mustVerifyEmail,
-  status
+  status,
 }: {
-  mustVerifyEmail: boolean
-  status?: string
+  mustVerifyEmail: boolean;
+  status?: string;
 }) {
-  const { auth } = usePage<SharedData>().props
+  const { auth } = usePage<SharedData>().props;
 
-  const { data, setData, patch, errors, processing, recentlySuccessful } =
-    useForm({
-      name: auth.user.name,
-      email: auth.user.email
-    })
+  const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    name: auth.user.name,
+    email: auth.user.email,
+  });
 
-  const submit: FormEventHandler = (e) => {
-    e.preventDefault()
+  const submit: FormEventHandler = e => {
+    e.preventDefault();
 
-    patch(route("profile.update"), {
-      preserveScroll: true
-    })
-  }
+    patch(route('profile.update'), {
+      preserveScroll: true,
+    });
+  };
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
@@ -61,7 +60,7 @@ export default function Profile({
                 id="name"
                 className="mt-1 block w-full"
                 value={data.name}
-                onChange={(e) => setData("name", e.target.value)}
+                onChange={e => setData('name', e.target.value)}
                 required
                 autoComplete="name"
                 placeholder="Full name"
@@ -78,7 +77,7 @@ export default function Profile({
                 type="email"
                 className="mt-1 block w-full"
                 value={data.email}
-                onChange={(e) => setData("email", e.target.value)}
+                onChange={e => setData('email', e.target.value)}
                 required
                 autoComplete="username"
                 placeholder="Email address"
@@ -92,7 +91,7 @@ export default function Profile({
                 <p className="mt-2 text-sm text-neutral-800">
                   Your email address is unverified.
                   <Link
-                    href={route("verification.send")}
+                    href={route('verification.send')}
                     method="post"
                     as="button"
                     className="rounded-md text-sm text-neutral-600 underline hover:text-neutral-900 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
@@ -101,7 +100,7 @@ export default function Profile({
                   </Link>
                 </p>
 
-                {status === "verification-link-sent" && (
+                {status === 'verification-link-sent' && (
                   <div className="mt-2 text-sm font-medium text-green-600">
                     A new verification link has been sent to your email address.
                   </div>
@@ -128,5 +127,5 @@ export default function Profile({
         <DeleteUser />
       </SettingsLayout>
     </AppLayout>
-  )
+  );
 }
