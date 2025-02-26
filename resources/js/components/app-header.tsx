@@ -21,12 +21,15 @@ import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import { useLaravelReactI18n } from 'laravel-react-i18n';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
+const { t } = useLaravelReactI18n();
+
 const mainNavItems: NavItem[] = [
   {
-    title: 'Dashboard',
+    title: t("Dashboard"),
     url: '/dashboard',
     icon: LayoutGrid,
   },
@@ -34,12 +37,12 @@ const mainNavItems: NavItem[] = [
 
 const rightNavItems: NavItem[] = [
   {
-    title: 'Repository',
+    title: t("Repository"),
     url: 'https://github.com/laravel/react-starter-kit',
     icon: Folder,
   },
   {
-    title: 'Documentation',
+    title: t("Documentation"),
     url: 'https://laravel.com/docs/starter-kits',
     icon: BookOpen,
   },
@@ -55,6 +58,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
   const page = usePage<SharedData>();
   const { auth } = page.props;
   const getInitials = useInitials();
+
   return (
     <>
       <div className="border-sidebar-border/80 border-b">
@@ -71,7 +75,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                 side="left"
                 className="bg-sidebar flex h-full w-64 flex-col items-stretch justify-between"
               >
-                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                <SheetTitle className="sr-only">{t("Navigation Menu")}</SheetTitle>
                 <SheetHeader className="flex justify-start text-left">
                   <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
                 </SheetHeader>
@@ -131,9 +135,6 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                       {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
                       {item.title}
                     </Link>
-                    {page.url === item.url && (
-                      <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
-                    )}
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -154,7 +155,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                           href={item.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group text-accent-foreground ring-offset-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+                          className="group text-accent-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md p-0 text-sm font-medium"
                         >
                           <span className="sr-only">{item.title}</span>
                           {item.icon && (
@@ -173,31 +174,9 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                 ))}
               </div>
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="size-10 rounded-full p-1">
-                  <Avatar className="size-8 overflow-hidden rounded-full">
-                    <AvatarImage src={auth.user.avatar} alt={auth.user.name} />
-                    <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                      {getInitials(auth.user.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end">
-                <UserMenuContent user={auth.user} />
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
         </div>
       </div>
-      {breadcrumbs.length > 1 && (
-        <div className="border-sidebar-border/70 flex w-full border-b">
-          <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
-            <Breadcrumbs breadcrumbs={breadcrumbs} />
-          </div>
-        </div>
-      )}
     </>
   );
 }
