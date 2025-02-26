@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 export function AppSidebar() {
@@ -21,7 +21,7 @@ export function AppSidebar() {
 
   const mainNavItems: NavItem[] = [
     {
-      title: t("Dashboard"),
+      title: t('Dashboard'),
       url: '/dashboard',
       icon: LayoutGrid,
     },
@@ -29,12 +29,12 @@ export function AppSidebar() {
 
   const footerNavItems: NavItem[] = [
     {
-      title: t("Repository"),
+      title: t('Repository'),
       url: 'https://github.com/laravel/react-starter-kit',
       icon: Folder,
     },
     {
-      title: t("Documentation"),
+      title: t('Documentation'),
       url: 'https://laravel.com/docs/starter-kits',
       icon: BookOpen,
     },

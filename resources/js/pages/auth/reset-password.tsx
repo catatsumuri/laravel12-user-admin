@@ -38,13 +38,13 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
   };
 
   return (
-    <AuthLayout title={t("Reset Password")} description={t("Please enter your new password below")}>
-      <Head title={t("Reset Password")} />
+    <AuthLayout title={t('Reset Password')} description={t('Please enter your new password below')}>
+      <Head title={t('Reset Password')} />
 
       <form onSubmit={submit}>
         <div className="grid gap-6">
           <div className="grid gap-2">
-            <Label htmlFor="email">{t("Email address")}</Label>
+            <Label htmlFor="email">{t('Email address')}</Label>
             <Input
               id="email"
               type="email"
@@ -59,7 +59,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="password">{t("New Password")}</Label>
+            <Label htmlFor="password">{t('New Password')}</Label>
             <Input
               id="password"
               type="password"
@@ -69,13 +69,13 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
               className="mt-1 block w-full"
               autoFocus
               onChange={e => setData('password', e.target.value)}
-              placeholder={t("New Password")}
+              placeholder={t('New Password')}
             />
             <InputError message={errors.password} />
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="password_confirmation">{t("Confirm New Password")}</Label>
+            <Label htmlFor="password_confirmation">{t('Confirm New Password')}</Label>
             <Input
               id="password_confirmation"
               type="password"
@@ -84,14 +84,14 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
               value={data.password_confirmation}
               className="mt-1 block w-full"
               onChange={e => setData('password_confirmation', e.target.value)}
-              placeholder={t("Confirm New Password")}
+              placeholder={t('Confirm New Password')}
             />
             <InputError message={errors.password_confirmation} className="mt-2" />
           </div>
 
           <Button type="submit" className="mt-4 w-full" disabled={processing}>
             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-            {t("Reset Password")}
+            {t('Reset Password')}
           </Button>
         </div>
       </form>

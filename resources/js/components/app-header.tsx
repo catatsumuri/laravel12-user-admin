@@ -25,31 +25,6 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
-const { t } = useLaravelReactI18n();
-
-const mainNavItems: NavItem[] = [
-  {
-    title: t("Dashboard"),
-    url: '/dashboard',
-    icon: LayoutGrid,
-  },
-];
-
-const rightNavItems: NavItem[] = [
-  {
-    title: t("Repository"),
-    url: 'https://github.com/laravel/react-starter-kit',
-    icon: Folder,
-  },
-  {
-    title: t("Documentation"),
-    url: 'https://laravel.com/docs/starter-kits',
-    icon: BookOpen,
-  },
-];
-
-const activeItemStyles = 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
-
 interface AppHeaderProps {
   breadcrumbs?: BreadcrumbItem[];
 }
@@ -58,6 +33,28 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
   const page = usePage<SharedData>();
   const { auth } = page.props;
   const getInitials = useInitials();
+  const { t } = useLaravelReactI18n();
+
+  const mainNavItems: NavItem[] = [
+    {
+      title: t('Dashboard'),
+      url: '/dashboard',
+      icon: LayoutGrid,
+    },
+  ];
+
+  const rightNavItems: NavItem[] = [
+    {
+      title: t('Repository'),
+      url: 'https://github.com/laravel/react-starter-kit',
+      icon: Folder,
+    },
+    {
+      title: t('Documentation'),
+      url: 'https://laravel.com/docs/starter-kits',
+      icon: BookOpen,
+    },
+  ];
 
   return (
     <>
@@ -75,7 +72,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                 side="left"
                 className="bg-sidebar flex h-full w-64 flex-col items-stretch justify-between"
               >
-                <SheetTitle className="sr-only">{t("Navigation Menu")}</SheetTitle>
+                <SheetTitle className="sr-only">{t('Navigation Menu')}</SheetTitle>
                 <SheetHeader className="flex justify-start text-left">
                   <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
                 </SheetHeader>
@@ -128,13 +125,16 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                       href={item.url}
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        page.url === item.url && activeItemStyles,
+                        page.url === item.url && 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100',
                         'h-9 cursor-pointer px-3'
                       )}
                     >
                       {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
                       {item.title}
                     </Link>
+                    {page.url === item.url && (
+                      <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
+                    )}
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -174,9 +174,33 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                 ))}
               </div>
             </div>
+
+            {/* 🔽 ユーザーメニュー (`DropdownMenu`) の復元 🔽 */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="size-10 rounded-full p-1">
+                  <Avatar className="size-8 overflow-hidden rounded-full">
+                    <AvatarImage src={auth.user.avatar} alt={auth.user.name} />
+                    <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                      {getInitials(auth.user.name)}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end">
+                <UserMenuContent user={auth.user} />
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
+      {breadcrumbs.length > 1 && (
+        <div className="border-sidebar-border/70 flex w-full border-b">
+          <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
+            <Breadcrumbs breadcrumbs={breadcrumbs} />
+          </div>
+        </div>
+      )}
     </>
   );
 }
