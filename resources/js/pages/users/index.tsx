@@ -2,18 +2,13 @@ import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, type User } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function UserIndex({ users }: { users: User[] }) {
-  const breadcrumbs: BreadcrumbItem[] = [
-    {
-      title: 'Users',
-      href: route('users.index'),
-    },
-  ];
+  const { props: { flash } } = usePage();
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title="Users" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <div className="flex items-center justify-between">

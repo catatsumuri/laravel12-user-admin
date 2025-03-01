@@ -22,17 +22,6 @@ interface CreateUserForm {
 export default function UserCreate() {
   const { t } = useLaravelReactI18n();
 
-  const breadcrumbs: BreadcrumbItem[] = [
-    {
-      title: 'Users',
-      href: route('users.index'),
-    },
-    {
-      title: 'Create',
-      href: route('users.create'),
-    },
-  ];
-
   const { data, setData, post, processing, errors, reset } = useForm<CreateUserForm>({
     name: '',
     email: '',
@@ -48,7 +37,7 @@ export default function UserCreate() {
   };
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title="New User" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <form className="flex flex-col gap-6" onSubmit={submit}>

@@ -24,21 +24,6 @@ interface EditUserForm {
 export default function UserEdit({ user }: { user: User }) {
   const { t } = useLaravelReactI18n();
 
-  const breadcrumbs: BreadcrumbItem[] = [
-    {
-      title: 'Users',
-      href: route('users.index'),
-    },
-    {
-      title: user.name,
-      href: route('users.show', user.id),
-    },
-    {
-      title: 'Edit',
-      href: route('users.edit', user.id),
-    },
-  ];
-
   const { data, setData, patch, processing, errors, reset } = useForm<EditUserForm>({
     name: user.name,
     email: user.email,
@@ -54,7 +39,7 @@ export default function UserEdit({ user }: { user: User }) {
   };
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title="Edit User" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <form className="flex flex-col gap-6" onSubmit={submit}>

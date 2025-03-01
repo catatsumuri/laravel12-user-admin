@@ -13,13 +13,6 @@ import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Profile settings',
-    href: '/settings/profile',
-  },
-];
-
 export default function Profile({
   mustVerifyEmail,
   status,
@@ -44,7 +37,7 @@ export default function Profile({
   };
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title={t('Profile settings')} />
 
       <SettingsLayout>

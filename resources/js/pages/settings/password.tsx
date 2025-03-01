@@ -12,13 +12,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
 
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Password settings',
-    href: '/settings/password',
-  },
-];
-
 export default function Password() {
   const { t } = useLaravelReactI18n();
   const passwordInput = useRef<HTMLInputElement>(null);
@@ -51,7 +44,7 @@ export default function Password() {
   };
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title={t('Password settings')} />
 
       <SettingsLayout>

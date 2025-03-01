@@ -15,17 +15,6 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
 export default function UserShow({ user }: { user: User }) {
-  const breadcrumbs: BreadcrumbItem[] = [
-    {
-      title: 'Users',
-      href: route('users.index'),
-    },
-    {
-      title: user.name,
-      href: route('users.show', user.id),
-    },
-  ];
-
   const { delete: destroy, processing } = useForm();
 
   const deleteUser: FormEventHandler = e => {
@@ -34,7 +23,7 @@ export default function UserShow({ user }: { user: User }) {
   };
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title={user.name} />
       <div className="flex flex-col items-center space-y-6 p-6">
         <Avatar className="h-32 w-32 border-4 border-gray-200 shadow-lg dark:border-gray-700">

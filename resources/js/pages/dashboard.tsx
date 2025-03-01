@@ -7,15 +7,8 @@ import { useLaravelReactI18n } from 'laravel-react-i18n';
 export default function Dashboard() {
   const { t } = useLaravelReactI18n();
 
-  const breadcrumbs: BreadcrumbItem[] = [
-    {
-      title: t('Dashboard'),
-      href: '/dashboard',
-    },
-  ];
-
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout>
       <Head title={t('Dashboard')} />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
