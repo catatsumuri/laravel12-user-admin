@@ -13,7 +13,7 @@ import {
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 
 export function AppSidebar() {
@@ -22,8 +22,13 @@ export function AppSidebar() {
   const mainNavItems: NavItem[] = [
     {
       title: t('Dashboard'),
-      url: '/dashboard',
+      url: route('dashboard'),
       icon: LayoutGrid,
+    },
+    {
+      title: t('Users'),
+      url: route('users.index'),
+      icon: Users,
     },
   ];
 

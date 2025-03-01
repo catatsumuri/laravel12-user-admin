@@ -20,8 +20,8 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import { useLaravelReactI18n } from 'laravel-react-i18n';
+import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
@@ -125,7 +125,8 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                       href={item.url}
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        page.url === item.url && 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100',
+                        page.url === item.url &&
+                          'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100',
                         'h-9 cursor-pointer px-3'
                       )}
                     >
@@ -155,7 +156,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                           href={item.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group text-accent-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md p-0 text-sm font-medium"
+                          className="group text-accent-foreground hover:bg-accent focus-visible:ring-ring ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md p-0 text-sm font-medium focus-visible:ring-2"
                         >
                           <span className="sr-only">{item.title}</span>
                           {item.icon && (
@@ -175,7 +176,6 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
               </div>
             </div>
 
-            {/* 🔽 ユーザーメニュー (`DropdownMenu`) の復元 🔽 */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="size-10 rounded-full p-1">
